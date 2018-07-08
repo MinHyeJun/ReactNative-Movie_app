@@ -26,15 +26,22 @@ class App extends Component {
   //Render: componentWillMoundt() -> render() -> componentDidMount()
   //Update componentWillReceiveProps() -> shouldComponentUpdate() == true -> componentWillUpdate()-> render() -> componentDidUpdate() 
   
+  state = {
+    greeting: 'Hello!'
+  }
+
+  componentDidMount(){
+    setTimeout(()=>{
+      this.setState({
+        greeting:'Hello again!'
+      })
+    },5000)
+  }
+  
   componentWillMount(){
     // 사이클 시작
     // api 요청 작업
     console.log('will mount')
-  }
-
-  componentDidMount(){
-    // 컴포넌트 자리 잡음
-    console.log('did mount')
   }
   
   render() {
@@ -43,6 +50,7 @@ class App extends Component {
     console.log('did render')
     return (
       <div className="App">
+      {this.state.greeting}
        {movies.map((movie, index) => {
          return <Movie title={movie.title} poster={movie.poster} key={index}/>
        })}
