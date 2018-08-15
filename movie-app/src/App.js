@@ -7,7 +7,11 @@ class App extends Component {
   state = { }
 
   componentDidMount(){
-    console.log(fetch('https://yts.am/api/v2/list_movies.json?sort_by=rating'))
+    // promise 사용하기
+    fetch('https://yts.am/api/v2/list_movies.json?sort_by=like_count')
+    .then(potato => potato.json())    // 상위 작업이 완료(성공하든 실패하든)되면 실행할 작업을 then()으로 명시
+    .then(json => console.log(json))
+    .catch(err => console.log(err))  // 상위 작업들에서 오류가 발생하면 catch() 실행
   }
 
   //리액트 자체 기능이 많기 때문에 사용자 정의 함수는 구별을 위해 시작시 _(언더바) 사용
