@@ -13,7 +13,13 @@ class App extends Component {
   //리액트 자체 기능이 많기 때문에 사용자 정의 함수는 구별을 위해 시작시 _(언더바) 사용
   _renderMoives = () => {
     const movies = this.state.movies.map(movie => {
-      return <Movie title={movie.title} poster={movie.large_cover_image} key={movie.id}/>
+      return <Movie
+      title = {movie.title_english}
+      poster = {movie.medium_cover_image}
+      key = {movie.id}
+      genres = {movie.genres}
+      synopsis = {movie.synopsis}
+      />
     })
 
     return movies
