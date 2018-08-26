@@ -38,20 +38,17 @@ class App extends Component {
 
   _callApi = () => {
     // promise 사용하기
-    return fetch('https://yts.am/api/v2/list_movies.json?sort_by=like_count')
+    return fetch('https://yts.am/api/v2/list_movies.json?sort_by=download_count')
     .then(potato => potato.json())    // 상위 작업이 완료(성공하든 실패하든)되면 실행할 작업을 then()으로 명시
     .then(json => json.data.movies)
     .catch(err => console.log(err))  // 상위 작업들에서 오류가 발생하면 catch() 실행
   }
 
   render() {
-    // 컴포넌트 존재
-    // 데이터 관련 작업
+    const { movies } = this.state;
     return (
-      <div className="App">
-        { // this.state에 movies라는 정보가 존재하는지 여부를 확인한 후,
-          // 경우에 따라 _renderMovies()함수가 실행되거나, Loading 문구가 출력되도록 함
-          this.state.movies? this._renderMoives() : 'Loading'}
+      <div className={movies ? "App" : "App--loading"}>
+        {movies ? this._renderMoives() : 'Loading'}
       </div>
     );
   }
