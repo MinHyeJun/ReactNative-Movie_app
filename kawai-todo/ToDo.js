@@ -34,8 +34,8 @@ export default class ToDo extends Component {
           {isEditing ? (
             <TextInput
               style={[
-                styles.input,
                 styles.text,
+                styles.input,
                 isCompleted ? styles.completedText : styles.uncompletedText
               ]}
               value={toDoValue}
@@ -57,7 +57,7 @@ export default class ToDo extends Component {
         </View>
         {isEditing ? (
           <View style={styles.actions}>
-            <TouchableOpacity onPressOut={this._finishEditing}>
+            <TouchableOpacity onPress={this._finishEditing}>
               <View style={styles.actionContainer}>
                 <Text style={styles.actionText}>✅</Text>
               </View>
@@ -65,7 +65,7 @@ export default class ToDo extends Component {
           </View>
         ) : (
           <View style={styles.actions}>
-            <TouchableOpacity onPressOut={this._startEditing}>
+            <TouchableOpacity onPress={this._startEditing}>
               <View style={styles.actionContainer}>
                 <Text style={styles.actionText}> ✏️</Text>
               </View>
@@ -160,6 +160,7 @@ const styles = StyleSheet.create({
   },
   input: {
     marginVertical: 15,
-    width: width/ 2
+    width: width/ 2,
+    paddingBottom: 5
   }
 });
