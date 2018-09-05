@@ -26,9 +26,11 @@ export default class App extends React.Component {
 
   render() {
     const { newToDo, loadedToDos } = this.state;
+
     if (!loadedToDos) {
       return <AppLoading />;
     }
+
     return (
       <View style={styles.container}>
         <StatusBar barStyle="light-content" />
@@ -51,7 +53,8 @@ export default class App extends React.Component {
       </View>
     );
   }
-  _constrollNewToDo = text => {
+
+  _controllNewToDo = text => {
     this.setState({
       newToDo: text
     });
@@ -94,7 +97,7 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 10,
     ...Platform.select({
       ios: {
-        shadowColor: "rgb(50, 50, 50,)",
+        shadowColor: "rgb(50, 50, 50)",
         shadowOpacity: 0.5,
         shadowRadius: 5,
         shadowOffset: {
