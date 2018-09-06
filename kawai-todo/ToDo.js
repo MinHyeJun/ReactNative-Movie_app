@@ -4,22 +4,32 @@ import {
   Text,
   TouchableOpacity,
   StyleSheet,
-  Dimensions
+  Dimensions,
+  TextInput
 } from "react-native";
-import { TextInput } from "react-native-gesture-handler";
+import PropTypes from "prop-types";
 
 const { width, height } = Dimensions.get("window");
 
 export default class ToDo extends Component {
-  state = {
-    isEditing: false,
-    isCompleted: false,
-    toDoValue: ""
+  constructor(props){
+    super(props);
+    this.state = {
+      isEditing: false,
+      toDoValue: props.text
+    };
+  };
+
+  static propTypes ={
+    text:PropTypes.string.isRequired,
+    isCompleted: PropTypes.bool.isRequired,
+    deleteToDo: PropTypes.func.isRequired,
+    id: PropTypes.string.isRequired
   };
 
   render() {
     const { isCompleted, isEditing, toDoValue } = this.state;
-    const { text } = this.props;
+    const { text, id, deleteToDo } = this.props;
     return (
       <View style={styles.container}>
         <View style={styles.column}>
@@ -70,7 +80,7 @@ export default class ToDo extends Component {
                 <Text style={styles.actionText}> ✏️</Text>
               </View>
             </TouchableOpacity>
-            <TouchableOpacity>
+            <TouchableOpacity onPressOut={() => deleteToDo(id)}>
               <View style={styles.actionContainer}>
                 <Text style={styles.actionText}>❌</Text>
               </View>
@@ -92,8 +102,7 @@ export default class ToDo extends Component {
   _startEditing = () => {
     const { text } = this.props;
     this.setState({
-      isEditing: true,
-      toDoValue: text
+      isEditing: true
     });
   };
 
@@ -148,8 +157,7 @@ const styles = StyleSheet.create({
   column: {
     flexDirection: "row",
     alignItems: "center",
-    width: width / 2,
-    justifyContent: "space-between"
+    width: width / 2
   },
   actions: {
     flexDirection: "row"
